@@ -1,5 +1,17 @@
-import 'package:dart_application_1/dart_application_1.dart' as dart_application_1;
+void main() {
+  int? a;
+  
+  int b = a ?? 5;
+  print(b);
 
-void main(List<String> arguments) {
-  print('Hello world: ${dart_application_1.calculate()}!');
+  a = 10;
+
+  int c = a!;
+  print(c);
+
+  if (a % 2 != 0) {
+    a = 3;
+  }
+
+  print(a.isEven);
 }
