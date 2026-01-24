@@ -1,0 +1,28 @@
+name: cours_01
+description: "Template 1er cours"
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.2.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+  openfoodfacts_flutter_lints:
+    git:
+      url: https://github.com/openfoodfacts/openfoodfacts_flutter_lints.git
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
