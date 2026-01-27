@@ -1,98 +1,134 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String _email = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 60),
-            const Text(
-              'Log in or sign up',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 30),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Email Address',
-                prefixIcon: const Icon(Icons.email_outlined),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 60),
+              const Text(
+                'Log in or sign up',
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF5390A4),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              const SizedBox(height: 30),
+              TextField(
+                autofocus: false,
+                onChanged: (String value) {
+                  setState(() {
+                    _email = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  prefixIcon: const Icon(Icons.email_outlined),
+                  hintText: 'Email Address',
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.grey),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Color(0xFF5390A4)),
+                  ),
                 ),
-                child: const Text('Continue', style: TextStyle(color: Colors.white, fontSize: 16)),
               ),
-            ),
-            const SizedBox(height: 30),
-            const Row(
-              children: [
-                Expanded(child: Divider()),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 10), child: Text('Or')),
-                Expanded(child: Divider()),
-              ],
-            ),
-            const SizedBox(height: 30),
-            OutlinedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 55),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                height: 55,
+                child: FilledButton(
+                  onPressed: _email.isNotEmpty ? () {} : null,
+                  style: FilledButton.styleFrom(
+                    backgroundColor: const Color(0xFF5390A4),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                  child: const Text('Continue'),
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset('assets/apple_logo.svg', height: 24),
-                  const SizedBox(width: 10),
-                  const Text('Continue with Apple', style: TextStyle(color: Colors.black)),
-                ],
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 40),
+                child: Row(
+                  children: [
+                    Expanded(child: Divider()),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Text('Or', style: TextStyle(color: Colors.grey)),
+                    ),
+                    Expanded(child: Divider()),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 15),
-            OutlinedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 55),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              SocialContinueButton(
+                label: 'Apple',
+                assetPath: 'assets/apple_logo.svg',
+                onPressed: () {},
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset('assets/google_logo.svg', height: 24),
-                  const SizedBox(width: 10),
-                  const Text('Continue with Google', style: TextStyle(color: Colors.black)),
-                ],
+              const SizedBox(height: 16),
+              SocialContinueButton(
+                label: 'Google',
+                assetPath: 'assets/google_logo.svg',
+                onPressed: () {},
               ),
-            ),
-            const SizedBox(height: 15),
-            OutlinedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 55),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              const SizedBox(height: 16),
+              SocialContinueButton(
+                label: 'Facebook',
+                assetPath: 'assets/facebook_logo.svg',
+                onPressed: () {},
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset('assets/facebook_logo.svg', height: 24),
-                  const SizedBox(width: 10),
-                  const Text('Continue with Facebook', style: TextStyle(color: Colors.black)),
-                ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SocialContinueButton extends StatelessWidget {
+  final String label;
+  final String assetPath;
+  final VoidCallback onPressed;
+
+  const SocialContinueButton({
+    super.key,
+    required this.label,
+    required this.assetPath,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 55,
+      child: OutlinedButton(
+        onPressed: onPressed,
+        style: OutlinedButton.styleFrom(
+          side: const BorderSide(color: Colors.grey),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+        child: Row(
+          children: [
+            SvgPicture.asset(assetPath, height: 24),
+            Expanded(
+              child: Text(
+                'Continue with $label',
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.black),
               ),
             ),
           ],
