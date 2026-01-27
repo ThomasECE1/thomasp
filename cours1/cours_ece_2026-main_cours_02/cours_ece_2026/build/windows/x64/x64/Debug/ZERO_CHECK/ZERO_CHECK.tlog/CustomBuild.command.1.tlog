@@ -1,0 +1,10 @@
+^C:\USERS\PRIGE\DESKTOP\DEVMOB\COURS1\COURS_ECE_2026-MAIN_COURS_02\COURS_ECE_2026\BUILD\WINDOWS\X64\CMAKEFILES\13526AE572BC8CE4370EDCBEA0DCA5C0\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/prige/Desktop/devmob/cours1/cours_ece_2026-main_cours_02/cours_ece_2026/windows -BC:/Users/prige/Desktop/devmob/cours1/cours_ece_2026-main_cours_02/cours_ece_2026/build/windows/x64 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/prige/Desktop/devmob/cours1/cours_ece_2026-main_cours_02/cours_ece_2026/build/windows/x64/formation_flutter.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

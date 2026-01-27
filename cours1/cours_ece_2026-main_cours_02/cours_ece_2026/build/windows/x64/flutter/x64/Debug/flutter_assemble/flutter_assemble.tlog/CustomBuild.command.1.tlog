@@ -1,0 +1,28 @@
+^C:\USERS\PRIGE\DESKTOP\DEVMOB\COURS1\COURS_ECE_2026-MAIN_COURS_02\COURS_ECE_2026\BUILD\WINDOWS\X64\CMAKEFILES\82DB7F19466488D822FF3974637719FD\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\Users\prige\flutter PROJECT_DIR=C:\Users\prige\Desktop\devmob\cours1\cours_ece_2026-main_cours_02\cours_ece_2026 FLUTTER_ROOT=C:\Users\prige\flutter FLUTTER_EPHEMERAL_DIR=C:\Users\prige\Desktop\devmob\cours1\cours_ece_2026-main_cours_02\cours_ece_2026\windows\flutter\ephemeral PROJECT_DIR=C:\Users\prige\Desktop\devmob\cours1\cours_ece_2026-main_cours_02\cours_ece_2026 FLUTTER_TARGET=C:\Users\prige\Desktop\devmob\cours1\cours_ece_2026-main_cours_02\cours_ece_2026\lib\main.dart DART_DEFINES=RkxVVFRFUl9WRVJTSU9OPTMuMzguNw==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049M2I2MmVmYzJhMw==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049NzhmYzMwMTJlNA==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My4xMC43 DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=C:\Users\prige\Desktop\devmob\cours1\cours_ece_2026-main_cours_02\cours_ece_2026\.dart_tool\package_config.json C:/Users/prige/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PRIGE\DESKTOP\DEVMOB\COURS1\COURS_ECE_2026-MAIN_COURS_02\COURS_ECE_2026\BUILD\WINDOWS\X64\CMAKEFILES\D736E58F7F1279C14BE35532B3ADD200\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\PRIGE\DESKTOP\DEVMOB\COURS1\COURS_ECE_2026-MAIN_COURS_02\COURS_ECE_2026\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/prige/Desktop/devmob/cours1/cours_ece_2026-main_cours_02/cours_ece_2026/windows -BC:/Users/prige/Desktop/devmob/cours1/cours_ece_2026-main_cours_02/cours_ece_2026/build/windows/x64 --check-stamp-file C:/Users/prige/Desktop/devmob/cours1/cours_ece_2026-main_cours_02/cours_ece_2026/build/windows/x64/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

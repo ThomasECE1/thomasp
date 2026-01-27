@@ -6,7 +6,7 @@ void main() {
 
   a = 10;
 
-  int c = a!;
+  int c = a;
   print(c);
 
   if (a % 2 != 0) {

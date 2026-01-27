@@ -32,7 +32,7 @@ class ProductPage extends StatelessWidget {
 }
 
 class _ProductDetails extends StatelessWidget {
-  const _ProductDetails({super.key});
+  const _ProductDetails();
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class ProductNutriscoreWidget extends StatelessWidget {
 }
 
 class _ProductBandeau extends StatelessWidget {
-  const _ProductBandeau({super.key});
+  const _ProductBandeau();
 
   @override
   Widget build(BuildContext context) {

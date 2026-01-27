@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               const SizedBox(height: 60),
               const Text(
                 'Log in or sign up',
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 40),
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Expanded(child: Divider()),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -99,9 +99,6 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class SocialContinueButton extends StatelessWidget {
-  final String label;
-  final String assetPath;
-  final VoidCallback onPressed;
 
   const SocialContinueButton({
     super.key,
@@ -109,6 +106,9 @@ class SocialContinueButton extends StatelessWidget {
     required this.assetPath,
     required this.onPressed,
   });
+  final String label;
+  final String assetPath;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +122,7 @@ class SocialContinueButton extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
         child: Row(
-          children: [
+          children: <Widget>[
             SvgPicture.asset(assetPath, height: 24),
             Expanded(
               child: Text(
