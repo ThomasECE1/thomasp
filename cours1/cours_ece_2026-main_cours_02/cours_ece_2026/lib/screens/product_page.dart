@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:formation_flutter/widget/product_provider.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final product = ProductProvider.of(context).product;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -13,12 +16,12 @@ class ProductPage extends StatelessWidget {
             left: 0,
             right: 0,
             height: 300,
-            child: Image.asset(
-              'photo.jpg', 
+            child: Image.network(
+              product.picture ?? '',
               fit: BoxFit.cover,
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 250,
             left: 0,
             right: 0,
@@ -36,6 +39,8 @@ class _ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final product = ProductProvider.of(context).product;
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -49,19 +54,19 @@ class _ProductDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Tartines Avocat Œuf',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Text(
+              product.name ?? '',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const Text(
-              'Sogeres',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+            Text(
+              product.brands?.join(', ') ?? '',
+              style: const TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 20),
-            const _ProductBandeau(),
+            _ProductBandeau(score: product.nutriScore?.name.toUpperCase()),
             const SizedBox(height: 20),
-            const MyDataRow(label: 'Quantité', value: '100g'),
-            const MyDataRow(label: 'Vendu', value: 'Espagne'),
+            MyDataRow(label: 'Quantité', value: product.quantity),
+            MyDataRow(label: 'Vendu', value: product.manufacturingCountries?.join(', ')),
           ],
         ),
       ),
@@ -90,7 +95,9 @@ class ProductNutriscoreWidget extends StatelessWidget {
 }
 
 class _ProductBandeau extends StatelessWidget {
-  const _ProductBandeau();
+  final String? score;
+
+  const _ProductBandeau({this.score});
 
   @override
   Widget build(BuildContext context) {
@@ -102,11 +109,11 @@ class _ProductBandeau extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             flex: 44,
             child: Padding(
-              padding: EdgeInsets.all(12.0),
-              child: ProductNutriscoreWidget(score: 'A'),
+              padding: const EdgeInsets.all(12.0),
+              child: ProductNutriscoreWidget(score: score ?? 'E'),
             ),
           ),
           const MySeparator(axis: Axis.vertical),
