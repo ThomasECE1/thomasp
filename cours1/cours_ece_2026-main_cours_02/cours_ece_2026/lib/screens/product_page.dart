@@ -1,31 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:formation_flutter/provider/product_provider.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 300,
-            child: Image.asset(
-              'photo.jpg', 
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned(
-            top: 250,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: _ProductDetails(),
-          ),
-        ],
+    return ChangeNotifierProvider(
+      create: (_) => ProductChangeNotifier(),
+      child: Scaffold(
+        body: Consumer<ProductChangeNotifier>(
+          builder: (context, notifier, child) {
+            final product = notifier.product;
+
+            if (product == null) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return Stack(
+              children: [
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 300,
+                  child: Image.network(
+                    product.picture ?? '',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const Positioned(
+                  top: 250,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: _ProductDetails(),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -36,6 +53,10 @@ class _ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final product = context.watch<ProductChangeNotifier>().product;
+
+    if (product == null) return const SizedBox();
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -49,19 +70,22 @@ class _ProductDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Tartines Avocat Œuf',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Text(
+              product.name ?? '',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const Text(
-              'Sogeres',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+            Text(
+              product.brands?.join(', ') ?? '',
+              style: const TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 20),
-            const _ProductBandeau(),
+            _ProductBandeau(score: product.nutriScore?.name.toUpperCase()),
             const SizedBox(height: 20),
-            const MyDataRow(label: 'Quantité', value: '100g'),
-            const MyDataRow(label: 'Vendu', value: 'Espagne'),
+            MyDataRow(label: 'Quantité', value: product.quantity),
+            MyDataRow(
+              label: 'Vendu',
+              value: product.manufacturingCountries?.join(', '),
+            ),
           ],
         ),
       ),
@@ -90,7 +114,9 @@ class ProductNutriscoreWidget extends StatelessWidget {
 }
 
 class _ProductBandeau extends StatelessWidget {
-  const _ProductBandeau();
+  final String? score;
+
+  const _ProductBandeau({this.score});
 
   @override
   Widget build(BuildContext context) {
@@ -102,11 +128,11 @@ class _ProductBandeau extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             flex: 44,
             child: Padding(
-              padding: EdgeInsets.all(12.0),
-              child: ProductNutriscoreWidget(score: 'A'),
+              padding: const EdgeInsets.all(12.0),
+              child: ProductNutriscoreWidget(score: score ?? 'E'),
             ),
           ),
           const MySeparator(axis: Axis.vertical),
@@ -118,7 +144,10 @@ class _ProductBandeau extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Text('Groupe Nova', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                  Text(
+                    'Groupe Nova',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
                   Text(
                     'Aliments non transformés ou transformés minimalement',
                     style: TextStyle(fontSize: 10, color: Colors.grey),
