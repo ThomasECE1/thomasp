@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import '../model/product.dart';
@@ -18,7 +19,12 @@ class ProductChangeNotifier extends ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
-        _product = Product.fromJson(response.data);
+        final Map<String, dynamic> mappedData = response.data is String 
+            ? jsonDecode(response.data) 
+            : response.data;
+
+        final productResponse = ProductResponse.fromJson(mappedData);
+        _product = productResponse.toEntity();
       }
     } catch (e) {
       debugPrint(e.toString());

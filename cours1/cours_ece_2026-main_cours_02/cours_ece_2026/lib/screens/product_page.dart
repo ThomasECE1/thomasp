@@ -82,7 +82,8 @@ class _ProductDetails extends StatelessWidget {
             _ProductBandeau(score: product.nutriScore?.name),
             const SizedBox(height: 20),
             _MyDataRow(label: 'Quantité', value: product.quantity),
-            _MyDataRow(label: 'Vendu', value: product.manufacturingCountries?.join(', ')),
+            // Correction ici : on utilise les données simplifiées
+            _MyDataRow(label: 'Code-barres', value: product.barcode),
           ],
         ),
       ),
